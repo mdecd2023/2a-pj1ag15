@@ -141,12 +141,29 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content"> <a href='W3.html'>Next</a> >> W3<br /><h1>About</h1>
-<p>四設計二甲</p>
-<p>成員:41023154張韋翔、41023135林政蔚</p>
-<p>倉儲:<a href="https://github.com/mdecd2023/2a-pj1ag15">https://github.com/mdecd2023/2a-pj1ag15</a></p>
-<p>網站:<a href="https://mdecd2023.github.io/2a-pj1ag15/content/index.html">https://mdecd2023.github.io/2a-pj1ag15/content/index.html</a></p>
-<p></p><br /> <a href='W3.html'>Next</a> >> W3</div>
+    <div id="tipue_search_content">About << <a href='About.html'>Previous</a> <br /><h1>W3</h1>
+<p><br/><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">pj1:</span></span></p>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">W3 - 請各組寫一個程式判定 2a 哪一組已經完成網頁建置.</span></span></p>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"></span></span></p>
+<pre class="brush:py;collapse:true;html-script:true" contenteditable="false">import requests
+
+websites = ["https://www.example1.com/", "https://mdecd2023.github.io/2a-pj1ag1/content/index.html", "https://mdecd2023.github.io/2a-pj1ag2/content/index.html"]
+
+for website in websites:
+    response = requests.get(website)
+    print(response.status_code)</pre>
+<p></p>
+<pre class="brush:py;collapse:true;html-script:true" contenteditable="false">import requests
+
+def check_if_site_exists(url):
+    r = requests.head(url)
+    if r.status_code == 200:
+        return True
+    else:
+        return False
+
+print(check_if_site_exists("https://mdecd2023.github.io/2a-pj1ag1/content/index.html", "https://mdecd2023.github.io/2a-pj1ag2/content/index.html", "https://mdecd2023.github.io/2a-pj1ag3/content/index.html", "https://mdecd2023.github.io/2a-pj1ag4/content/index.html", "https://mdecd2023.github.io/2a-pj1ag5/content/index.html", "https://mdecd2023.github.io/2a-pj1ag6/content/index.html", "https://mdecd2023.github.io/2a-pj1ag7/content/index.html", "https://mdecd2023.github.io/2a-pj1ag8/content/index.html", "https://mdecd2023.github.io/2a-pj1ag9/content/index.html", "https://mdecd2023.github.io/2a-pj1ag10/content/index.html", "https://mdecd2023.github.io/2a-pj1ag11/content/index.html", "https://mdecd2023.github.io/2a-pj1ag12/content/index.html", "https://mdecd2023.github.io/2a-pj1ag13/content/index.html", "https://mdecd2023.github.io/2a-pj1ag14/content/index.html", "https://mdecd2023.github.io/2a-pj1ag15/content/index.html", "https://mdecd2023.github.io/2a-pj1ag16/content/index.html", "https://mdecd2023.github.io/2a-pj1ag17/content/index.html", "https://mdecd2023.github.io/2a-pj1ag18/content/index.html", "https://mdecd2023.github.io/2a-pj1ag19/content/index.html", "https://mdecd2023.github.io/2a-pj1ag20/content/index.html", "https://mdecd2023.github.io/2a-pj1ag21/content/index.html"))</pre>
+<p></p><br />About << <a href='About.html'>Previous</a> </div>
         
     <!-- footer -->
       <div class="container">
