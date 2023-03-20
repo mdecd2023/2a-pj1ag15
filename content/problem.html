@@ -165,6 +165,21 @@ img.add_border {
 </li>
 </ol>
 <p>在遊戲開發方面，Lua 語言經常被用於實現遊戲邏輯、遊戲腳本、AI 策略等方面的功能。它的簡潔和易學易用的特點，以及和其他程式語言的良好互操作性，使得它成為遊戲開發人員和嵌入式系統開發人員的重要選擇。</p>
+<p></p>
+<div class="flex flex-grow flex-col gap-3">
+<h4 class="min-h-[20px] flex flex-col items-start gap-4 whitespace-pre-wrap">執行序與非執行序差別?</h4>
+</div>
+<div class="text-gray-400 flex self-end lg:self-center justify-center mt-2 gap-3 md:gap-4 lg:gap-1 lg:absolute lg:top-0 lg:translate-x-full lg:right-0 lg:mt-0 lg:pl-2 visible"></div>
+<div class="flex flex-grow flex-col gap-3">
+<div class="min-h-[20px] flex flex-col items-start gap-4 whitespace-pre-wrap">
+<div class="markdown prose w-full break-words dark:prose-invert dark">
+<p>執行序（Thread）和非執行序（Non-Thread）是指程式中的兩種不同的執行方式。</p>
+<p>非執行序是指程式的單一執行緒模式，這種模式下程式的指令是一條一條依次執行的，直到遇到需要等待外部事件（例如輸入輸出、計時器、網路訊息等）的時候，才會暫停執行，等待事件的發生。</p>
+<p>而執行序是指程式的多執行緒模式，這種模式下程式中可以同時執行多個指令序列，也就是執行緒。每個執行緒有自己的程式計數器、堆疊、變數和執行狀態等，並且可以獨立運行，互不干擾。因此，執行序模式下的程式可以同時執行多個任務，有效提高程式的執行效率和性能。</p>
+<p>簡單來說，非執行序模式下的程式是單線程的，只有一條指令序列，每個指令都必須等待前面的指令執行完成後才能執行，因此速度相對較慢；而執行序模式下的程式是多線程的，可以同時執行多個指令序列，速度相對更快，但也需要注意線程之間的同步和互斥問題。</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div><br />專案規劃 << <a href='專案規劃.html'>Previous</a> </div>
