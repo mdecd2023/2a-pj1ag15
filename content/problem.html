@@ -141,31 +141,48 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">每周progress << <a href='每周progress.html'>Previous</a> <a href='w3(0309).html'>Next</a> >> w3(0309)<br /><h1>W3</h1>
-<p><br/><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">pj1:</span></span></p>
-<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">W3 - 請各組寫一個程式判定 2a 哪一組已經完成網頁建置.</span></span></p>
-<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"></span></span></p>
-<pre class="brush:py;collapse:true;html-script:true" contenteditable="false">import requests
-
-websites = ["https://www.example1.com/", "https://mdecd2023.github.io/2a-pj1ag1/content/index.html", "https://mdecd2023.github.io/2a-pj1ag2/content/index.html"]
-
-for website in websites:
-    response = requests.get(website)
-    print(response.status_code)</pre>
+    <div id="tipue_search_content">專案規劃 << <a href='專案規劃.html'>Previous</a> <br /><h1>problem</h1>
+<div class="flex flex-grow flex-col gap-3">
+<div class="min-h-[20px] flex flex-col items-start gap-4 whitespace-pre-wrap">
+<div class="markdown prose w-full break-words dark:prose-invert dark">
+<p>lua?</p>
+<p>Lua 是一種腳本語言，主要用於嵌入式系統和遊戲開發。Lua 語言的特點包括：</p>
+<ol>
+<li>
+<p>簡潔：Lua 語言的語法簡潔，只有大約 30 個關鍵字和幾個基本資料型別，易於學習和使用。</p>
+</li>
+<li>
+<p>快速：Lua 語言的執行速度非常快，因為它使用了即時編譯技術。</p>
+</li>
+<li>
+<p>可擴展：Lua 語言的核心非常小，但可以通過庫來實現擴展功能。許多著名的遊戲開發引擎和應用程式都使用了 Lua 語言。</p>
+</li>
+<li>
+<p>易嵌入：Lua 語言可以很容易地嵌入到 C 或 C++ 程式中，這樣就可以實現 Lua 語言和 C/C++ 語言之間的互操作。</p>
+</li>
+<li>
+<p>高自由度：Lua 語言提供了高自由度的面向對象編程方式，同時還支援函數式編程方式。</p>
+</li>
+</ol>
+<p>在遊戲開發方面，Lua 語言經常被用於實現遊戲邏輯、遊戲腳本、AI 策略等方面的功能。它的簡潔和易學易用的特點，以及和其他程式語言的良好互操作性，使得它成為遊戲開發人員和嵌入式系統開發人員的重要選擇。</p>
 <p></p>
-<pre class="brush:py;collapse:true;html-script:true" contenteditable="false">import requests
-
-def check_if_site_exists(url):
-    r = requests.head(url)
-    if r.status_code == 200:
-        return True
-    else:
-        return False
-
-print(check_if_site_exists("https://mdecd2023.github.io/2a-pj1ag1/content/index.html", "https://mdecd2023.github.io/2a-pj1ag2/content/index.html", "https://mdecd2023.github.io/2a-pj1ag3/content/index.html", "https://mdecd2023.github.io/2a-pj1ag4/content/index.html", "https://mdecd2023.github.io/2a-pj1ag5/content/index.html", "https://mdecd2023.github.io/2a-pj1ag6/content/index.html", "https://mdecd2023.github.io/2a-pj1ag7/content/index.html", "https://mdecd2023.github.io/2a-pj1ag8/content/index.html", "https://mdecd2023.github.io/2a-pj1ag9/content/index.html", "https://mdecd2023.github.io/2a-pj1ag10/content/index.html", "https://mdecd2023.github.io/2a-pj1ag11/content/index.html", "https://mdecd2023.github.io/2a-pj1ag12/content/index.html", "https://mdecd2023.github.io/2a-pj1ag13/content/index.html", "https://mdecd2023.github.io/2a-pj1ag14/content/index.html", "https://mdecd2023.github.io/2a-pj1ag15/content/index.html", "https://mdecd2023.github.io/2a-pj1ag16/content/index.html", "https://mdecd2023.github.io/2a-pj1ag17/content/index.html", "https://mdecd2023.github.io/2a-pj1ag18/content/index.html", "https://mdecd2023.github.io/2a-pj1ag19/content/index.html", "https://mdecd2023.github.io/2a-pj1ag20/content/index.html", "https://mdecd2023.github.io/2a-pj1ag21/content/index.html"))</pre>
-<p></p>
-<p></p>
-<br />每周progress << <a href='每周progress.html'>Previous</a> <a href='w3(0309).html'>Next</a> >> w3(0309)</div>
+<div class="flex flex-grow flex-col gap-3">
+<h4 class="min-h-[20px] flex flex-col items-start gap-4 whitespace-pre-wrap">執行序與非執行序差別?</h4>
+</div>
+<div class="text-gray-400 flex self-end lg:self-center justify-center mt-2 gap-3 md:gap-4 lg:gap-1 lg:absolute lg:top-0 lg:translate-x-full lg:right-0 lg:mt-0 lg:pl-2 visible"></div>
+<div class="flex flex-grow flex-col gap-3">
+<div class="min-h-[20px] flex flex-col items-start gap-4 whitespace-pre-wrap">
+<div class="markdown prose w-full break-words dark:prose-invert dark">
+<p>執行序（Thread）和非執行序（Non-Thread）是指程式中的兩種不同的執行方式。</p>
+<p>非執行序是指程式的單一執行緒模式，這種模式下程式的指令是一條一條依次執行的，直到遇到需要等待外部事件（例如輸入輸出、計時器、網路訊息等）的時候，才會暫停執行，等待事件的發生。</p>
+<p>而執行序是指程式的多執行緒模式，這種模式下程式中可以同時執行多個指令序列，也就是執行緒。每個執行緒有自己的程式計數器、堆疊、變數和執行狀態等，並且可以獨立運行，互不干擾。因此，執行序模式下的程式可以同時執行多個任務，有效提高程式的執行效率和性能。</p>
+<p>簡單來說，非執行序模式下的程式是單線程的，只有一條指令序列，每個指令都必須等待前面的指令執行完成後才能執行，因此速度相對較慢；而執行序模式下的程式是多線程的，可以同時執行多個指令序列，速度相對更快，但也需要注意線程之間的同步和互斥問題。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><br />專案規劃 << <a href='專案規劃.html'>Previous</a> </div>
         
     <!-- footer -->
       <div class="container">
