@@ -2,6 +2,7 @@
         <head>
         <title>cmsimde_site</title>
         <meta charset="utf-8">
+<meta property="head" content="H2">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -94,6 +95,7 @@ img.add_border {
 </head>
 <body>
 <div class='container'><nav>
+        
     <div class="site-wrap">
 
     <div class="site-mobile-menu">
@@ -139,4 +141,117 @@ img.add_border {
           </div>
           
         </header>
-    </nav><section><h1>Site Map</h1><div id="tipue_search_content"></div><ul><li><a href='About.html'>About</a><li><a href='每周progress.html'>每周progress</a><li><a href='W3.html'>W3</a><li><a href='w3(0309).html'>w3(0309)</a><li><a href='tutorial1.html'>tutorial1</a><ul><li><a href='參考資料.html'>參考資料</a></li></ul><li><a href='專案規劃.html'>專案規劃</a><li><a href='problem.html'>problem</a><li><a href='pj1.html'>pj1</a><ul><li><a href='w6.html'>w6</a><li><a href='w7.html'>w7</a></li></ul></section></div></body></html>
+    <div id="tipue_search_content">w6 << <a href='w6.html'>Previous</a> <br /><h1>w7</h1>
+<p>嘗試製作記分板</p>
+<p>在CoppeliaSim中設置一個記分板：</p>
+<ol>
+<li>
+<p>在場景中添加一個“Text”元件，可以通過進入“Add”菜單並選擇“Primitive Shape”，然後選擇“Text”來實現。</p>
+</li>
+<li>
+<p>使用物件的屬性面板將文本對象進行定位和調整大小。您可以在此面板中調整文本的位置，大小，顏色和其他屬性。</p>
+</li>
+<li>
+<p>透過雙擊文本對象來設置初始計分板文字，並輸入所需的文字。您也可以使用屬性面板更改文本的字體和其他屬性。</p>
+</li>
+<li>
+<p>創建一個腳本以更新記分板的文字。您可以通過為文本對象創建一個新的子腳本（右鍵單擊對象，然後選擇“Add child script”），或者創建一個引用該文本對象的單獨腳本來實現。</p>
+</li>
+<li>
+<p>在腳本中使用“simSetDlgItem”函數將記分板的文字設置為所需的值。此函數接受三個參數：文本對象的句柄（您可以使用“simGetObjectHandle”函數獲取它），要設置的文本字段的索引（通常為0，表示第一個和唯一的文本字段），以及要設置的文本。</p>
+</li>
+<li>
+<p>從另一個腳本或對象的子腳本中調用此腳本，以根據需要更新記分板的文字。</p>
+遇到的問題是找不到primitive shape裡的"text"</li>
+</ol>
+<p>後改另外一種方法:</p>
+<p>如果不使用CoppeliaSim的Text组件来创建记分板，还有其他方法可以实现。</p>
+<p>一种方法是使用CoppeliaSim中的Shape组件来创建自定义的记分板，例如使用两个矩形Shape组件表示分数和计时器。然后，您可以使用Lua脚本或Python脚本更新矩形Shape组件的颜色或位置等属性以显示实时的分数和计时器。</p>
+<p>另一种方法是使用CoppeliaSim中的BubbleRob模型作为基础，自定义其外观并添加记分板功能。例如，您可以将BubbleRob模型的身体部分替换为一个矩形Shape组件，然后使用Lua脚本或Python脚本更新该矩形Shape组件中的文本或颜色等属性以显示实时的分数和计时器。同时，您还需要编写脚本来控制BubbleRob模型的运动和行为。</p>
+<p>code</p>
+<pre class="brush:py;collapse:true;html-script:true" contenteditable="false">function sysCall_init()
+    -- Get handles of the Shape components
+    scoreBoardHandle = sim.getObjectHandle('score_board')
+    scoreTextHandle = sim.getObjectHandle('score_text')
+    timeTextHandle = sim.getObjectHandle('time_text')
+    
+    -- Set initial scores and time limit
+    homeScore = 0
+    awayScore = 0
+    timeLimit = 120 -- in seconds
+    
+    -- Update the score board
+    updateScoreBoard()
+end
+
+function sysCall_actuation()
+    -- Update the time
+    timeLimit = timeLimit - sim.getSimulationTimeStep()
+    
+    -- Update the score board
+    updateScoreBoard()
+end
+
+function updateScoreBoard()
+    -- Update the score text
+    sim.setShapeText(scoreTextHandle, 'HOME: ' .. homeScore .. ' - ' .. awayScore .. ' :AWAY')
+    
+    -- Update the time text
+    sim.setShapeText(timeTextHandle, 'TIME: ' .. math.floor(timeLimit) .. 's')
+end
+
+function sysCall_cleanup()
+    -- do some clean-up here
+end
+</pre>
+<p></p></div></div></div></div></div></div><br />w6 << <a href='w6.html'>Previous</a> </div>
+        
+    <!-- footer -->
+      <div class="container">
+        <div class="row pt-3 mx-auto">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+        </div>
+      </div>
+    <!-- for footer -->
+    
+        </div> <!-- for site wrap -->
+            <!-- <script src="../cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+            <script src="../cmsimde/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery-ui.js"></script>
+            <script src="../cmsimde/static/chimper/js/popper.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/owl.carousel.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.stellar.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.countdown.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.magnific-popup.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap-datepicker.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/aos.js"></script>
+            <!--
+            <script src="../cmsimde/static/chimper/js/typed.js"></script>
+                    <script>
+                    var typed = new Typed('.typed-words', {
+                    strings: ["Web Apps"," WordPress"," Mobile Apps"],
+                    typeSpeed: 80,
+                    backSpeed: 80,
+                    backDelay: 4000,
+                    startDelay: 1000,
+                    loop: true,
+                    showCursor: true
+                    });
+                    </script>
+            -->
+            <script src="../cmsimde/static/chimper/js/main.js"></script>
+        
+<!-- 啟用 LaTeX equations 編輯 -->
+  <!-- <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\(', '\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
+    </body></html>
+        

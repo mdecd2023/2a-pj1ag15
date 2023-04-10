@@ -234,7 +234,7 @@ var winkVideoData1 = {
 <p></p>
 <p></p>
 <h1>pj1</h1>
-<p>-W9:目標是利用兩台 BubbleRob 雙輪車在一足球場景中進行對戰, 其中在雙方球門設置感測器, 雙方各有一名 BubbleRob 負責運球, 在規定時間內, 每進一球後, 即透過程式重新從球場中線發球重啟賽局. 其中各組必須設法配置計分板顯示比賽剩餘時間與比分.</p>
+<p>-W9:目標是利用兩台 BubbleRob 雙輪車在一足球場景中進行對戰, 其中在雙方球門設置感測器, 雙方各有一名 BubbleRob 負責運球, 在規定時間內, 每進一球後, 即透過程式重新從球場中線發球重啟賽局. 其中各組必須設法配置計分板顯示比賽剩餘時間與比分.<br/><br/><br/></p>
 <p>建立球場:</p>
 <!-- 接下來將 mp4 檔案從 downloads 目錄取出 -->
 <div class="winkVideoContainerClass"><video autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="/static" data-varname="winkVideoData1" height="630" muted="true" width="1008">
@@ -265,4 +265,68 @@ var winkVideoData1 = {
 <p>ag3:  41023108 、41023110</p>
 <p>ag4:  41023125、 41023128</p>
 <p>ag19: 41023101、41023141</p>
-<p>ag20: 41023109、41023105</p></div></div></div></div></div></div>
+<p>ag20: 41023109、41023105</p>
+<h2>w7</h2>
+<p>嘗試製作記分板</p>
+<p>在CoppeliaSim中設置一個記分板：</p>
+<ol>
+<li>
+<p>在場景中添加一個“Text”元件，可以通過進入“Add”菜單並選擇“Primitive Shape”，然後選擇“Text”來實現。</p>
+</li>
+<li>
+<p>使用物件的屬性面板將文本對象進行定位和調整大小。您可以在此面板中調整文本的位置，大小，顏色和其他屬性。</p>
+</li>
+<li>
+<p>透過雙擊文本對象來設置初始計分板文字，並輸入所需的文字。您也可以使用屬性面板更改文本的字體和其他屬性。</p>
+</li>
+<li>
+<p>創建一個腳本以更新記分板的文字。您可以通過為文本對象創建一個新的子腳本（右鍵單擊對象，然後選擇“Add child script”），或者創建一個引用該文本對象的單獨腳本來實現。</p>
+</li>
+<li>
+<p>在腳本中使用“simSetDlgItem”函數將記分板的文字設置為所需的值。此函數接受三個參數：文本對象的句柄（您可以使用“simGetObjectHandle”函數獲取它），要設置的文本字段的索引（通常為0，表示第一個和唯一的文本字段），以及要設置的文本。</p>
+</li>
+<li>
+<p>從另一個腳本或對象的子腳本中調用此腳本，以根據需要更新記分板的文字。</p>
+遇到的問題是找不到primitive shape裡的"text"</li>
+</ol>
+<p>後改另外一種方法:</p>
+<p>如果不使用CoppeliaSim的Text组件来创建记分板，还有其他方法可以实现。</p>
+<p>一种方法是使用CoppeliaSim中的Shape组件来创建自定义的记分板，例如使用两个矩形Shape组件表示分数和计时器。然后，您可以使用Lua脚本或Python脚本更新矩形Shape组件的颜色或位置等属性以显示实时的分数和计时器。</p>
+<p>另一种方法是使用CoppeliaSim中的BubbleRob模型作为基础，自定义其外观并添加记分板功能。例如，您可以将BubbleRob模型的身体部分替换为一个矩形Shape组件，然后使用Lua脚本或Python脚本更新该矩形Shape组件中的文本或颜色等属性以显示实时的分数和计时器。同时，您还需要编写脚本来控制BubbleRob模型的运动和行为。</p>
+<p>code</p>
+<pre class="brush:html;collapse:true;toolbar:false" contenteditable="false">function sysCall_init()
+    -- Get handles of the Shape components
+    scoreBoardHandle = sim.getObjectHandle('score_board')
+    scoreTextHandle = sim.getObjectHandle('score_text')
+    timeTextHandle = sim.getObjectHandle('time_text')
+    
+    -- Set initial scores and time limit
+    homeScore = 0
+    awayScore = 0
+    timeLimit = 120 -- in seconds
+    
+    -- Update the score board
+    updateScoreBoard()
+end
+
+function sysCall_actuation()
+    -- Update the time
+    timeLimit = timeLimit - sim.getSimulationTimeStep()
+    
+    -- Update the score board
+    updateScoreBoard()
+end
+
+function updateScoreBoard()
+    -- Update the score text
+    sim.setShapeText(scoreTextHandle, 'HOME: ' .. homeScore .. ' - ' .. awayScore .. ' :AWAY')
+    
+    -- Update the time text
+    sim.setShapeText(timeTextHandle, 'TIME: ' .. math.floor(timeLimit) .. 's')
+end
+
+function sysCall_cleanup()
+    -- do some clean-up here
+end
+</pre>
+<p></p></div></div></div></div></div></div>
