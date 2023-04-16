@@ -239,7 +239,115 @@ var winkVideoData1 = {
 <!-- 接下來將 mp4 檔案從 downloads 目錄取出 -->
 <div class="winkVideoContainerClass"><video autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="/static" data-varname="winkVideoData1" height="630" muted="true" width="1008">
 <source src="/downloads/wink/field.mp4" type="video/mp4"/></video></div>
+<div class="winkVideoContainerClass">微改球場:<br/>兩側空位可能會導致球卡住，因此將其填起來。<br/><img alt="" height="671" src="/images/football.png" width="1279"/></div>
 <div class="winkVideoContainerClass"></div>
+<div class="winkVideoContainerClass">新增感測器:<br/><br/></div>
+<!-- 接下來將 mp4 檔案從 downloads 目錄取出 -->
+<div class="winkVideoContainerClass"><video autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="/static" data-varname="winkVideoData1" height="630" muted="true" width="1008">
+<source src="/downloads/wink/football_sensor.mp4" type="video/mp4"/></video></div>
+<div class="winkVideoContainerClass"></div>
+<div class="winkVideoContainerClass"></div>
+<div class="winkVideoContainerClass">感測器-計分板:</div>
+<div class="winkVideoContainerClass">
+<pre class="brush:lua" contenteditable="false">function sysCall_init()
+    score1 = 0
+      
+    sensor = sim.getObject('./sensor')
+    xml = [[
+        &lt;ui title="Scoreboard" closeable="false" resizable="false" style="plastique"&gt;
+        &lt;label text="Score:" style="* {background-color: #808080; color: #000000; font-size: 40px; font-weight: bold; padding: 5px; border-radius: 5px; }" id="10"/&gt;
+        &lt;label text="0" style="* {background-color: #FFF; color: #000000; font-size: 40px; font-weight: bold; padding: 5px; border-radius: 5px;}" id="30"/&gt;
+       
+        &lt;/ui&gt;
+    ]]
+    ui = simUI.create(xml)
+    simUI.setPosition(ui, 200,0, true)
+    bubbleRob = sim.getObject('/bubbleRob')
+    ball = sim.getObject('/ball')
+    bubbleRob2 = sim.getObject('/bubbleRob2')
+    initialPosition = sim.getObjectPosition(bubbleRob, -1)
+    initialOrientation = sim.getObjectOrientation(bubbleRob, -1)
+    initialPosition2 = sim.getObjectPosition(bubbleRob2, -1)
+    initialOrientation2 = sim.getObjectOrientation(bubbleRob2, -1)
+    initialballPosition = sim.getObjectPosition(ball, -1)
+    initialballOrientation = sim.getObjectOrientation(ball, -1)
+  
+end
+  
+  
+function sysCall_actuation()
+    --simUI.setLabelText(ui, 30, tostring(sim.getFloatSignal("myVariable")))
+    result=sim.readProximitySensor(sensor)
+    if(score1&lt;5)then
+        if(result&gt;0)then
+            score2 = score1+1
+            simUI.setLabelText(ui, 30, tostring(score2))
+  
+            sim.setObjectPosition(bubbleRob, -1, initialPosition)
+            sim.setObjectOrientation(bubbleRob, -1, initialOrientation)
+            sim.setObjectPosition(bubbleRob2, -1, initialPosition2)
+            sim.setObjectOrientation(bubbleRob2, -1, initialOrientation2)
+            sim.setObjectPosition(ball, -1, initialballPosition)
+            sim.setObjectOrientation(ball, -1, initialballOrientation)
+            score1=score2
+        end
+    else
+        sim.pauseSimulation()
+    end
+end</pre>
+</div>
+<div class="winkVideoContainerClass"></div>
+<div class="winkVideoContainerClass"><br/>計分板+計數器:</div>
+<div class="winkVideoContainerClass">
+<pre class="brush:lua" contenteditable="false">function sysCall_init()
+    score1 = 0 
+    count = 60000
+    sensor = sim.getObject('./sensor')
+    xml = [[
+            &lt;ui title="Scoreboard" closeable="false" resizable="false" style="plastique"&gt;
+              &lt;label text="60:00.0" style="* {background-color: #F00; color: #FFF; font-size: 32px; font-weight: bold; padding: 4px; border-radius: 4px;}" id="10"/&gt;
+              &lt;label text="p1 Score:" style="* {background-color: #808080; color: #000000; font-size: 40px; font-weight: bold; padding: 5px; border-radius: 5px; }" id="20"/&gt;
+              &lt;label text="0" style="* {background-color: #FFF; color: #000000; font-size: 40px; font-weight: bold; padding: 5px; border-radius: 5px;}" id="30"/&gt;
+            &lt;/ui&gt;
+          ]]
+    ui = simUI.create(xml)
+    simUI.setPosition(ui, 0, 0, true)
+    bubbleRob = sim.getObject('/bubbleRob')
+    ball = sim.getObject('/ball')
+    initialPosition = sim.getObjectPosition(bubbleRob, -1)
+    initialOrientation = sim.getObjectOrientation(bubbleRob, -1)
+    initialballPosition = sim.getObjectPosition(ball, -1)
+    initialballOrientation = sim.getObjectOrientation(ball, -1)
+     
+end
+ 
+function sysCall_actuation() 
+    result=sim.readProximitySensor(sensor)
+    if(score1&lt;5)then
+        if(result&gt;0)then
+            score2 = score1+1
+            simUI.setLabelText(ui, 30, tostring(score2))
+            sim.setObjectPosition(bubbleRob, -1, initialPosition)
+            sim.setObjectOrientation(bubbleRob, -1, initialOrientation)
+            sim.setObjectPosition(ball, -1, initialballPosition)
+            sim.setObjectOrientation(ball, -1, initialballOrientation)
+            score1=score2
+        end
+    end
+    if count &gt; 0 then 
+          count = count - 1 
+          local minutes = math.floor(count / 60) 
+          local seconds = count % 60 
+          local timeStr = string.format("%d:%02d", minutes , seconds)
+          simUI.setLabelText(ui, 10, timeStr) 
+          simUI.setLabelText(ui, 30, tostring(score1)) 
+    else
+        sim.pauseSimulation()
+    end
+end</pre>
+</div>
+<div class="winkVideoContainerClass"></div>
+<div class="winkVideoContainerClass">新增計分器和計時器:</div>
 <div class="winkVideoContainerClass"></div><h2>w6</h2>
 <p>根據以下:</p>
 <p>查驗結果:<a href="https://gist.githubusercontent.com/mdecycu/92a2f2d8389aeeca986ecb9f7a901180/raw/a9fcd1d1f33d892c8a1f30102262a3269475741f/2a_w6-2_python_remote_api_result.txt">https://gist.githubusercontent.com/mdecycu/92a2f2d8389aeeca986ecb9f7a901180/raw/a9fcd1d1f33d892c8a1f30102262a3269475741f/2a_w6-2_python_remote_api_result.txt</a> <br/><br/> 2a github對應:<a href="https://mde.tw/studlist/2023spring/2a.txt">https://mde.tw/studlist/2023spring/2a.txt</a></p>
@@ -294,7 +402,7 @@ var winkVideoData1 = {
 <p>一种方法是使用CoppeliaSim中的Shape组件来创建自定义的记分板，例如使用两个矩形Shape组件表示分数和计时器。然后，您可以使用Lua脚本或Python脚本更新矩形Shape组件的颜色或位置等属性以显示实时的分数和计时器。</p>
 <p>另一种方法是使用CoppeliaSim中的BubbleRob模型作为基础，自定义其外观并添加记分板功能。例如，您可以将BubbleRob模型的身体部分替换为一个矩形Shape组件，然后使用Lua脚本或Python脚本更新该矩形Shape组件中的文本或颜色等属性以显示实时的分数和计时器。同时，您还需要编写脚本来控制BubbleRob模型的运动和行为。</p>
 <p>code</p>
-<pre class="brush:html;collapse:true;toolbar:false" contenteditable="false">function sysCall_init()
+<pre class="brush:py;collapse:true;html-script:true" contenteditable="false">function sysCall_init()
     -- Get handles of the Shape components
     scoreBoardHandle = sim.getObjectHandle('score_board')
     scoreTextHandle = sim.getObjectHandle('score_text')
