@@ -12,7 +12,8 @@
 <li>w5:建立考試帳號(網站:<a href="https://exam.cycu.org/">https://exam.cycu.org/</a> )</li>
 <li>w6:coppeliasim wasd控制方向</li>
 </ul>
-<p></p><h1>W3</h1>
+<p></p>
+<h1>W3</h1>
 <p><br/><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">pj1:</span></span></p>
 <p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">W3 - 請各組寫一個程式判定 2a 哪一組已經完成網頁建置.</span></span></p>
 <p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"></span></span></p>
@@ -39,7 +40,8 @@ print(check_if_site_exists("https://mdecd2023.github.io/2a-pj1ag1/content/index.
 <p></p>
 <p><br/><br/></p>
 <p></p>
-<p></p><h1>w3(0309)</h1>
+<p></p>
+<h1>w3(0309)</h1>
 <p>41023135心得:.git檔案錯誤複製後，上課由老師講解並解決問題。</p>
 <p>問題解決方式 :</p>
 <p><a href="https://mde.tw/cd2023/content/%E7%B6%AD%E8%AD%B7%E5%80%89%E5%84%B2.html">https://mde.tw/cd2023/content/%E7%B6%AD%E8%AD%B7%E5%80%89%E5%84%B2.html</a></p>
@@ -238,7 +240,8 @@ var winkVideoData1 = {
 </div>
 </div>
 </div>
-</div><h1>pj1</h1>
+</div>
+<h1>pj1</h1>
 <p>-W9:目標是利用兩台 BubbleRob 雙輪車在一足球場景中進行對戰, 其中在雙方球門設置感測器, 雙方各有一名 BubbleRob 負責運球, 在規定時間內, 每進一球後, 即透過程式重新從球場中線發球重啟賽局. 其中各組必須設法配置計分板顯示比賽剩餘時間與比分.<br/><br/><br/></p>
 <p>建立球場:</p>
 <!-- 接下來將 mp4 檔案從 downloads 目錄取出 -->
@@ -356,7 +359,8 @@ end</pre>
 <div class="winkVideoContainerClass"></div>
 <!-- 接下來將 mp4 檔案從 downloads 目錄取出 -->
 <div class="winkVideoContainerClass"><video autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="/static" data-varname="winkVideoData1" height="630" muted="true" width="1008">
-<source src="/downloads/wink/scoring.mp4" type="video/mp4"/></video></div><h2>w6</h2>
+<source src="/downloads/wink/scoring.mp4" type="video/mp4"/></video></div>
+<h2>w6</h2>
 <p>根據以下:</p>
 <p>查驗結果:<a href="https://gist.githubusercontent.com/mdecycu/92a2f2d8389aeeca986ecb9f7a901180/raw/a9fcd1d1f33d892c8a1f30102262a3269475741f/2a_w6-2_python_remote_api_result.txt">https://gist.githubusercontent.com/mdecycu/92a2f2d8389aeeca986ecb9f7a901180/raw/a9fcd1d1f33d892c8a1f30102262a3269475741f/2a_w6-2_python_remote_api_result.txt</a> <br/><br/> 2a github對應:<a href="https://mde.tw/studlist/2023spring/2a.txt">https://mde.tw/studlist/2023spring/2a.txt</a></p>
 <p><img alt="" height="326" src="/images/MicrosoftTeams-image.png" width="403"/></p>
@@ -445,4 +449,38 @@ function sysCall_cleanup()
     -- do some clean-up here
 end
 </pre>
-<p></p>
+<h1>group</h1>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html, document
+# 在預警退選結束後, 已經不需要從教務主機讀取學員選課資料, 可以直接從 studlist 取得
+stud_data = "https://mde.tw/studlist/2023spring/2b.txt"
+# 先確定可以取得各欄位的資料
+# 利用 open() 開啟網站連結, 之後透過 readlines() 將每一行放入 list
+data = open(stud_data).readlines()
+# 查驗是否完整讀取所有學員資料
+print(len(data[1:]))
+# 接著以 for 迴圈逐一讀出數列時, 同時去除最後的 \print
+for i in data[1:]:
+    # 因為 data 第一列為資料標題, 可以利用 data[1:] 去除
+    # 而數列中每一個 element 最後的跳行符號 \n 可以利用 strip() 去除
+    stud_list = i.strip().split("\t")
+    stud_num = stud_list[0]
+    github = stud_list[1]
+    pj1 = stud_list[2]
+    pj2 = stud_list[3]
+    pj3 = stud_list[4]
+    print(stud_num, github, pj1, pj2, pj3)
+    print()
+'''
+acd_tem = "https://mdecd2023.github.io/2a2-pj2ag"
+agithub = "https://github.com/mdecd2023/2a2-pj2ag"
+brython_div = document["brython_div1"]
+for i in range(1, 12):
+    url = acd_tem + str(i)
+    github = agithub + str(i)
+    brython_div &lt;= html.A("pj2ag"+str(i), href=url)
+    brython_div &lt;= " ("
+    brython_div &lt;= html.A("repo", href=github)
+    brython_div &lt;= ")"
+    brython_div &lt;= html.BR()
+'''</pre>
+<p><br/><br/></p>
